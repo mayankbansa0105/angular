@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormGroup, FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-register-user',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register-user.component.scss']
 })
 export class RegisterUserComponent implements OnInit {
+  regForm: FormGroup;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.regForm = this.formBuilder.group({
+      userName: [''],
+      password: [''],
+      role: ['']
+    });
   }
 
 }

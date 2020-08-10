@@ -4,7 +4,7 @@
 
       <div class="main-container">
         <h1>Register User</h1>
-        <form [formGroup]="searchForm" (ngSubmit)="getSearchRecord()" class="mt4">
+        <form [formGroup]="regForm" class="mt4">
           <div class="form-row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
               <label>User Name</label>
@@ -21,7 +21,7 @@
               <label>Password</label>
               <div class="input-group">
                 <div class="input-wrapper">
-                  <input name="Password" class="form-control" type="text" formControlName="Password">
+                  <input name="password" class="form-control" type="text" formControlName="password">
                 </div>
               </div>
               
