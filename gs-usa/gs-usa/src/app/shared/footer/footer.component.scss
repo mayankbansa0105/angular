@@ -1,0 +1,54 @@
+.footer {
+    background-color: #00AE58;
+    vertical-align: bottom;
+    width: 100%;
+    bottom: 0px;
+    color: #ffffff;
+    padding: 20px 0px 20px 40px;
+    font-size: 14px;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif ;
+}
+.footerLinks {
+    display: flex;
+}
+
+.footerLinks div {
+    margin-right: 20px;
+}
+.socialLink {
+    display: flex;
+    margin-right: 0px !important;
+    margin-left: 49%;
+}
+.mt4 {
+    margin-top: 40px;
+}
+.keepTouch {
+    display: flex;
+    margin-left: 17%;
+}
+.disclouserStat {
+    display: flex;
+}
+.disclouserStat div {
+    margin-right: 20px;
+}
+.icons {
+    display: flex;
+    font-size: 30px;
+}
+
+.icons div{
+    margin-right: 40px;
+}
+
+.mr0 {
+    margin-right: 0px !important;
+}
+.mt35 {
+    margin-top: 35px;
+}
+.rightsText {
+    font-size: 17px;
+    line-height: 30px;
+}
