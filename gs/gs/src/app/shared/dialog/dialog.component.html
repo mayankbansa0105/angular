@@ -1,0 +1,16 @@
+<div mat-dialog-content>
+    <h1>PayLoad</h1>
+    <!-- <textarea matInput class="textBox">{{payLoads | json}}
+    </textarea> -->
+    <form [formGroup]="payloadUpdate" (ngSubmit)="updatePayload()">
+        <textarea contenteditable="true" class="textBox" formControlName="payLoads"
+            [(ngModel)]="payLoads">{{payLoads}}</textarea>
+        <div mat-dialog-actions>
+            <button class="btn btn-default" mat-button (click)="onNoClick()" style="margin-right: 10px">Cancel</button>
+            <button class="btn btn-primary" mat-button cdkFocusInitial type="submit"
+                *ngIf="updateButton ==='REPROCESS'">Update</button>
+        </div>
+    </form>
+
+
+</div>

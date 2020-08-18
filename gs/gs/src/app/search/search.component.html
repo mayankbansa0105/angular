@@ -1,0 +1,122 @@
+<app-header></app-header>
+<div class="main">
+  <div class="wrapper">
+
+    <div class="main-container">
+      <h1>Search Integration</h1>
+      <form [formGroup]="searchForm" (ngSubmit)="getSearchRecord(); sendData()" class="mt4">
+        <div class="form-row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <label>Integration Code</label>
+            <div class="form-group">
+              <select class="form-control" formControlName="intName">
+                <option *ngFor="let dropdown of intCode;let x = index" [ngValue]="dropdown.IntegrationCode">
+                  {{dropdown.IntegrationName}}
+                </option>
+              </select>
+            </div>
+
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <label>Source Id</label>
+            <div class="input-group">
+              <div class="input-wrapper">
+                <input name="sourceId" class="form-control" type="text" formControlName="sourceId">
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <label>Integration Status</label>
+            <div class="form-group">
+              <select class="form-control" formControlName="intStatus">
+                <option>All</option>
+                <option>Success</option>
+                <option>Error</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <label>From Date</label>
+            <div class="input-group">
+              <div class="input-wrapper">
+                <input type="date" class="form-control" name="fromDate" formControlName="fromDate">
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <label>To Date</label>
+            <div class="input-group">
+              <div class="input-wrapper">
+                <input type="date" class="form-control" name="toDate" formControlName="toDate">
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12 col-lg-12 text-center">
+            <button class="btn btn-primary" type="submit">Search</button>
+            <button class="btn btn-secondary m-3" type="button" (click)="clearForm()">Clear</button>
+          </div>
+        </div>
+      </form>
+
+
+
+      <!--mat table-->
+      <div class="row" [hidden]="tableData">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <mat-table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="integration_code">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Integration Code </mat-header-cell>
+              <mat-cell *matCellDef="let element"><a
+                  [routerLink]="['/search-detail', element.integration_code]">{{element.integration_code}}</a>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="integration_name">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Integration Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.integration_name}} </mat-cell>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="total_count">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Total Count </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.total_count}} </mat-cell>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="success_count">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Success Count </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.success_count}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="error_count">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Error Count </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.error_count}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]"></mat-paginator>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+<app-footer></app-footer>

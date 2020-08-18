@@ -1,0 +1,11 @@
+.textBox {
+    overflow-y: scroll;
+    white-space: pre-wrap;
+    width: 600px;
+    height: 400px;
+}
+
+.mat-dialog-content {
+    max-height: 100% !important;
+    overflow: visible !important;
+}

@@ -1,0 +1,149 @@
+<app-header></app-header>
+<div class="main">
+  <div class="wrapper">
+    <div class="main-container">
+      <div routerLink="/search" class="backBtn"><span class="leftArrow">&lsaquo;</span> <span
+          class="backText">Back</span></div>
+      <h1>{{pageTitle}}</h1>
+      <div *ngIf="isLoading" class="row">
+        <div class="col-sm-12 ">
+          <mat-spinner class="alignCenter"></mat-spinner>
+        </div>
+      </div>
+
+      <!-- <div *ngIf="!isLoading"> -->
+      <button mat-button [matMenuTriggerFor]="menu" class="btn btn-primary">Add Column</button>
+      <mat-menu #menu="matMenu">
+        <mat-checkbox class="mat-menu-item" (click)="$event.stopPropagation()" (change)="columnClick('GLOBAL_TRX_ID')">
+          <span>Global Trx Id</span>
+        </mat-checkbox>
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="columnClick('TARGET_TRX_ID')" class="mat-menu-item">
+          <span>Target Trx Id</span>
+        </mat-checkbox>
+
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="columnClick('INT_DTLS_ID')" class="mat-menu-item">
+          <span>Transaction Id</span>
+        </mat-checkbox>
+
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="columnClick('SOURCE_SYSTEM')" class="mat-menu-item">
+          <span>Source System</span>
+        </mat-checkbox>
+
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="columnClick('TARGET_SYSTEM')" class="mat-menu-item">
+          <span>Target System</span>
+        </mat-checkbox>
+
+
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="columnClick('ERROR_CODE')" class="mat-menu-item">
+          <span>Error Code</span>
+        </mat-checkbox>
+
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="columnClick('LAST_UPD_USER_ID')"
+          class="mat-menu-item">
+          <span>Last Update User</span>
+        </mat-checkbox>
+      </mat-menu>
+      <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 mt4">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="SOURCE_TRX_ID">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Source Id </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.SOURCE_TRX_ID}}</mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="TRX_TYPE">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Trx Type </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.TRX_TYPE}} </mat-cell>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="CREATION_DATE">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Trx Date </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.CREATION_DATE | date}} </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="INTEGRATION_STATUS">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Integration Status </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.INTEGRATION_STATUS}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ERROR_TYPE">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Error Type </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.ERROR_TYPE | uppercase}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ERROR_MSG">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Error Message </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.ERROR_MSG}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="PAYLOAD">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Payload </mat-header-cell>
+          <mat-cell *matCellDef="let element" (click)="editUser(element)" class="payLoad"> {{element.PAYLOAD}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="GLOBAL_TRX_ID">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            Global
+            Trx ID </mat-header-cell>
+          <mat-cell *matCellDef="let element" (click)="editUser(element)">
+            {{element.GLOBAL_TRX_ID}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="TARGET_TRX_ID">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Target Trx ID </mat-header-cell>
+          <mat-cell *matCellDef="let element" (click)="editUser(element)">
+            {{element.TARGET_TRX_ID}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="INT_DTLS_ID">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Trx Id </mat-header-cell>
+          <mat-cell *matCellDef="let element" (click)="editUser(element)">
+            {{element.INT_DTLS_ID}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="SOURCE_SYSTEM">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Source System </mat-header-cell>
+          <mat-cell *matCellDef="let element" (click)="editUser(element)">
+            {{element.SOURCE_SYSTEM}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="TARGET_SYSTEM">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Target System </mat-header-cell>
+          <mat-cell *matCellDef="let element" (click)="editUser(element)">
+            {{element.TARGET_SYSTEM}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ERROR_CODE">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Error Code </mat-header-cell>
+          <mat-cell *matCellDef="let element" (click)="editUser(element)">
+            {{element.ERROR_CODE}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="LAST_UPD_USER_ID">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Last Updated User </mat-header-cell>
+          <mat-cell *matCellDef="let element" (click)="editUser(element)">
+            {{element.LAST_UPD_USER_ID}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button class="btn btn-primary ml20" *ngIf="element.ERROR_TYPE === 'REPROCESS'"
+              (click)="reProcess(element)">Reprocess</button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getRecord(row)"></mat-row>
+      </mat-table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]"></mat-paginator>
+      <!-- </div> -->
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
