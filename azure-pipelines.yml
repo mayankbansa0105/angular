@@ -9,23 +9,46 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- task: SnykSecurityScan@0
-  inputs:
-    serviceConnectionEndpoint: 'synkconnection'
-    testType: 'app'
-    targetFile: 'gs/package.json'
-    monitorOnBuild: true
-    failOnIssues: false
-    projectName: 'angularnewgs'
-    organization: 'mayankbansal0105'
 
-- task: SnykSecurityScan@0
-  inputs:
-    serviceConnectionEndpoint: 'synkconnection'
-    testType: 'app'
-    targetFile: 'GSNodeDevelopment/package.json'
-    monitorOnBuild: true
-    failOnIssues: false
-    projectName: 'angularnewGSNodeDevelopment'
-    organization: 'mayankbansal0105'
+
+stages:
+ - stage: GSscan
+   jobs:
+     - job: GSSCAN
+       steps:
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                   cd gs
+                   npm install
+
+          - task: SnykSecurityScan@0
+            inputs:
+              serviceConnectionEndpoint: 'synkconnection'
+              testType: 'app'
+              targetFile: 'gs/package.json'
+              monitorOnBuild: true
+              failOnIssues: false
+              projectName: 'angularnewgs'
+              organization: 'mayankbansal0105'
+ - stage: GSnodescan
+   jobs:
+     - job: GSNodescan
+       steps:
+        - task: Bash@3
+          inputs:
+            targetType: 'inline'
+            script: |
+              cd GSNodeDevelopment
+              npm install
+
+        - task: SnykSecurityScan@0
+          inputs:
+            serviceConnectionEndpoint: 'synkconnection'
+            testType: 'app'
+            targetFile: 'GSNodeDevelopment/package.json'
+            monitorOnBuild: true
+            failOnIssues: false
+            projectName: 'angularnewGSNodeDevelopment'
+            organization: 'mayankbansal0105'
