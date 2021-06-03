@@ -14,7 +14,18 @@ steps:
   inputs:
     serviceConnectionEndpoint: 'synkconnection'
     testType: 'app'
+    targetFile: 'gs/package.json'
     monitorOnBuild: true
     failOnIssues: false
-    projectName: 'angularnew'
+    projectName: 'angularnewgs'
+    organization: 'mayankbansal0105'
+
+- task: SnykSecurityScan@0
+  inputs:
+    serviceConnectionEndpoint: 'synkconnection'
+    testType: 'app'
+    targetFile: 'GSNodeDevelopment/package.json'
+    monitorOnBuild: true
+    failOnIssues: false
+    projectName: 'angularnewGSNodeDevelopment'
     organization: 'mayankbansal0105'
