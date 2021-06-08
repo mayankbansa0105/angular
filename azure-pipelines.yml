@@ -48,6 +48,7 @@ stages:
             serviceConnectionEndpoint: 'synkconnection'
             testType: 'app'
             targetFile: 'GSNodeDevelopment/package.json'
+            severityThreshold: 'high'
             monitorOnBuild: true
             failOnIssues: false
             projectName: 'angularnewGSNodeDevelopment'
